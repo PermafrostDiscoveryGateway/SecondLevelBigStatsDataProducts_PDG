@@ -3,15 +3,19 @@ Generate a second-level statistics data products based on the IWP dataset from P
 
 
 -------------------------------
+## Repo walk-in tips
 1. Tutorials: this foloder contains all the detailed progresses we have done to produce this big data product along the project. It consists of three python files that introduce every step to generate results.
-  *gpkg_statstistics_mapping_noDatabase_alaska*: the code using geopackages to generate big stats maps. (This is what we use currently.)
-  *shapefile_CountMap*: the code using shapefile to generate only count maps.
-  *shapefile_CoverageMap*: the code using shapefile to generate coverage heat maps.
+
+   *gpkg_statstistics_mapping_noDatabase_alaska*: the code using geopackages to generate big stats maps. (This is what we use currently.)
+
+   *shapefile_CountMap*: the code using shapefile to generate only count maps.
+
+   *shapefile_CoverageMap*: the code using shapefile to generate coverage heat maps.
    
-2. Data: this folder contains the part of the results we have generated in Alaska region.
+3. Data: this folder contains the part of the results we have generated in Alaska region.
    This folder contains part of final stats: IWP count, IWP area, length (diameter) sum/max/min/median/mean/perimeter, width, LCP count.
   
-3. src: this foloder contains two sub project: 1) using geopackages. 2) using shapefile.
+4. src: this foloder contains two sub project: 1) using geopackages. 2) using shapefile.
 
 -------------------------------
 
