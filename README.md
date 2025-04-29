@@ -1,6 +1,22 @@
 # Second-level big statistics data products for Ice Wedge Polygon (IWP) across Pan-Arctic
 Generate a second-level statistics data products based on the IWP dataset from PDG
 
+
+-------------------------------
+1. Tutorials: this foloder contains all the detailed progresses we have done to produce this big data product along the project. It consists of three python files that introduce every step to generate results.
+  *gpkg_statstistics_mapping_noDatabase_alaska*: the code using geopackages to generate big stats maps. (This is what we use currently.)
+  *shapefile_CountMap*: the code using shapefile to generate only count maps.
+  *shapefile_CoverageMap*: the code using shapefile to generate coverage heat maps.
+   
+2. Data: this folder contains the part of the results we have generated in Alaska region.
+   This folder contains part of final stats: IWP count, IWP area, length (diameter) sum/max/min/median/mean/perimeter, width, LCP count.
+  
+4. src: this foloder contains two sub project: 1) using geopackages. 2) using shapefile.
+
+
+
+
+
 ## 1. Objectives
 Ice Wedge (IW) is a crack in the ground formed by a narrow or thin piece of ice that measures up to 3–4 meters in length at ground level. As IW gets deeper, Ice Wedge Polygons are formed. The large number of IWPs across the entire Pan-Arctic region were extracted and organized by PDG (either in geopackage or shapefile format in an arctic projection EPSG:3413).
 
