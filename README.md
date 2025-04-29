@@ -17,13 +17,31 @@ The goal of this project is to analysis the polygons, and generate data products
 
 This tutorial will walk you through how to download these Ice Wedge Polygon (IWP), how to process the data in batch, and finally generate big statistics data products. 
 
-## 2. Workflow
+## 2. Overall big data production workflow
 
 ![image](https://github.com/user-attachments/assets/fb7c5960-4a8f-4f73-8198-dcf7df5d818c)
+1) Our previous work have 
 
 
+## 3. Project datasets
+### 1) IWP polygon dataset
+Introduction
+https://arcticdata.io/catalog/view/doi:10.18739/A2KW57K57
 
-## 3. Products partial exhibition
+Dataset API
+
+(geopackages)
+https://arcticdata.io/data/10.18739/A2KW57K57/iwp_geopackage_high/WGS1984Quad/
+
+(shapefile)
+https://arcticdata.io/data/10.18739/A2KW57K57/iwp_shapefile_detections/high/alaska/146_157_iwp/
+
+
+### 2) IW Network validation dataset
+https://par.nsf.gov/biblio/10554721-ice-wedge-network-centerline-ice-wedge-polygon-coverage-bernard-river-watershed-banks-island-canada
+
+
+## 4. Products partial exhibition
 
 * 230 Grids
 
@@ -33,4 +51,13 @@ This tutorial will walk you through how to download these Ice Wedge Polygon (IWP
 * IWP count in Alaska
 
 ![image](https://github.com/user-attachments/assets/14f54b39-4d08-486b-967e-c20558da4a98)
+
+## 5. References
+Witharana, C., Bhuiyan, M. A. E., & Liljedahl, A. K. (2020). Big Imagery and High Performance Computing as Resources to Understand Changing Arctic Polygonal Tundra. The International Archives of the Photogrammetry, Remote Sensing and Spatial Information Sciences, 44, 111-116.
+
+Udawalpola, M., Hasan, A., Liljedahl, A. K., Soliman, A., & Witharana, C. (2021). Operational-scale geoai for pan-arctic permafrost feature detection from high-resolution satellite imagery. The International Archives of the Photogrammetry, Remote Sensing and Spatial Information Sciences, 44, 175-180.
+
+Liljedahl, A. K., Witharana, C., & Manos, E. (2024). The capillaries of the Arctic tundra. Nature Water, 2(7), 611-614.
+
+Liljedahl, A. K., Boike, J., Daanen, R. P., Fedorov, A. N., Frost, G. V., Grosse, G., ... & Zona, D. (2016). Pan-Arctic ice-wedge degradation in warming permafrost and its influence on tundra hydrology. Nature geoscience, 9(4), 312-318.
 
