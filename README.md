@@ -11,7 +11,9 @@ Generate a second-level statistics data products based on the IWP dataset from P
 2. Data: this folder contains the part of the results we have generated in Alaska region.
    This folder contains part of final stats: IWP count, IWP area, length (diameter) sum/max/min/median/mean/perimeter, width, LCP count.
   
-4. src: this foloder contains two sub project: 1) using geopackages. 2) using shapefile.
+3. src: this foloder contains two sub project: 1) using geopackages. 2) using shapefile.
+
+-------------------------------
 
 
 
