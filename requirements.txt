@@ -1,0 +1,11 @@
+numpy
+pandas
+geopandas
+rasterio
+opencv-python
+scikit-image
+morecantile
+shapely
+pyproj
+requests
+joblib
