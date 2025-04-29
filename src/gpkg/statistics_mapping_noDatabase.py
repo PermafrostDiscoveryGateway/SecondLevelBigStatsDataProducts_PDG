@@ -156,7 +156,7 @@ def data_analyse(tiles, bounds, file_root='downloads', crs='EPSG:3413'):
 
     # get the skeleton of the IWP
     inbox_gdf = inbox_gdf.to_crs(crs)
-    IWP_skeleton = IWP_skelenize(inbox_gdf['geometry'], bounds)
+    # IWP_skeleton = IWP_skelenize(inbox_gdf['geometry'], bounds)
     
     # print(inbox_gdf.columns)
     stats = [
@@ -166,10 +166,12 @@ def data_analyse(tiles, bounds, file_root='downloads', crs='EPSG:3413'):
         inbox_gdf['Length'].min(),
         inbox_gdf['Length'].max(),
         inbox_gdf['Length'].median(),
+        inbox_gdf['Length'].mean(),
+        inbox_gdf['Length'].std(),
         inbox_gdf['Perimeter'].sum(),
         inbox_gdf['Width'].sum(),
-        (inbox_gdf['Class'].astype(int) == 1).sum(),
-        IWP_skeleton.sum()
+        (inbox_gdf['Class'].astype(int) == 1).sum()
+        # IWP_skeleton.sum()
     ]
 
     return stats
