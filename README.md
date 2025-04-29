@@ -6,16 +6,30 @@ Generate a second-level statistics data products based on the IWP dataset from P
 ## Repo walk-in tips
 1. Tutorials: this foloder contains all the detailed progresses we have done to produce this big data product along the project. It consists of three python files that introduce every step to generate results.
 
-   *gpkg_statstistics_mapping_noDatabase_alaska*: the code using geopackages to generate big stats maps. (This is what we use currently.)
+   **gpkg_statstistics_mapping_noDatabase_alaska: the code using geopackages to generate big stats maps. (This is what we use currently.)**
 
-   *shapefile_CountMap*: the code using shapefile to generate only count maps.
+   shapefile_CountMap: the code using shapefile to generate only count maps.
 
-   *shapefile_CoverageMap*: the code using shapefile to generate coverage heat maps.
+   shapefile_CoverageMap: the code using shapefile to generate coverage heat maps.
    
 3. Data: this folder contains the part of the results we have generated in Alaska region.
    This folder contains part of final stats: IWP count, IWP area, length (diameter) sum/max/min/median/mean/perimeter, width, LCP count.
   
-4. src: this foloder contains two sub project: 1) using geopackages. 2) using shapefile.
+4. src: this foloder contains two sub project:
+
+   1) using geopackages.
+
+      **Without database: This is the code we are currently use for generating data products. It runs without database to achieve the best performance.**
+
+      With database: This is previous experiments we've tried.
+
+   3) using shapefile.
+  
+      Countmap.py: This file we used to create IWP count (heatmap) map based on shapefile.
+
+      CoveragePercentage.py: This file we used to create coverage ratio map based on shapefile.
+
+      createSQL.sh & shpImport.sh: These shell files were created to be used by the above two files in python.
 
 -------------------------------
 
@@ -42,7 +56,17 @@ This tutorial will walk you through how to download these Ice Wedge Polygon (IWP
 ## 2. Overall big data production workflow
 
 ![image](https://github.com/user-attachments/assets/fb7c5960-4a8f-4f73-8198-dcf7df5d818c)
-1) Our previous work have 
+
+### What we have done
+
+1) First-level IWP vector data [Witharana et al. (2020) and Udawalpola (2021)].
+
+2) Run Prithivi on the first-level data.
+
+
+### What we are doing
+
+1) Create second-level IWP stats data based on the first-level data.
 
 
 ## 3. Project datasets
