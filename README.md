@@ -38,9 +38,11 @@ Generate a second-level statistics data products based on the IWP dataset from P
 
 
 ## 1. Objectives
-Ice Wedge (IW) is a crack in the ground formed by a narrow or thin piece of ice that measures up to 3–4 meters in length at ground level. As IW gets deeper, Ice Wedge Polygons are formed. The large number of IWPs across the entire Pan-Arctic region were extracted and organized by PDG (either in geopackage or shapefile format in an arctic projection EPSG:3413).
+Ice Wedge (IW) is a crack in the ground formed by a narrow or thin piece of ice that measures up to 3–4 meters in length at ground level. As IW gets deeper, Ice Wedge Polygons are formed. 
 
-The goal of this project is to analysis the polygons, and generate data products to describe different profiles of IWP. This include: 
+The large number of IWPs across the entire Pan-Arctic region were extracted and organized by PDG (either in geopackage or shapefile format in an arctic projection EPSG:3413).
+
+The goal of this project is to analysis the polygons, and generate data products to describe different statistical profiles of IWP. This include: 
 
 * IWP count maps.
 * Area sum
