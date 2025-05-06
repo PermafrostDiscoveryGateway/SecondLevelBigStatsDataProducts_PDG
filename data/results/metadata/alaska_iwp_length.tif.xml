@@ -1,0 +1,28 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<metadata>
+<idinfo>
+<citation>
+<citeinfo>
+<title>The length sum of ice wedge polygons in Alaska (1km)</title>
+</citeinfo>
+</citation>
+<descript>
+<abstract>The raster calculates the length sum of all deduplicated IWPs with their centroid falling within 1km resolution. (If the IWPs is overlaid by the 1km pixel BBOX, but their centroids falling outside, they won't be count in this pixel). </abstract>
+<purpose>This raster stores the total length of IWPs in Alaska. Each pixel value shows the length sum of IWPs within the 1km*1km area.</purpose>
+</descript>
+<keywords>
+<theme>
+<themekt>None</themekt>
+<themekey>IWP length sum</themekey>
+</theme>
+</keywords>
+<accconst>None</accconst>
+<useconst>This statistics is calculated based on IWP dataset from: https://arcticdata.io/catalog/view/doi:10.18739/A2KW57K57Users are encouraged to provide feedback regarding how they use this data and issues. Please reach out to the dataset contact or a member of the PDG team via support@arcticdata.io.</useconst>
+<datacred>Permafrost Discovery Gateway</datacred>
+</idinfo>
+<metainfo>
+<metstdn>FGDC Content Standard for Digital Geospatial Metadata</metstdn>
+<metstdv>FGDC-STD-001-1998</metstdv>
+<mettc>local time</mettc>
+</metainfo>
+</metadata>
