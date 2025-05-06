@@ -3,7 +3,7 @@ Generate a second-level statistics data products based on the IWP dataset from P
 
 
 -------------------------------
-## Repo walk-in tips
+## Repository introduction
 1. Tutorials: this foloder contains all the detailed progresses we have done to produce this big data product along the project. It consists of three python files that introduce every step to generate results.
 
    **gpkg_statstistics_mapping_noDatabase_alaska: the code using geopackages to generate big stats maps. (This is what we use currently.)**
