@@ -8,6 +8,8 @@ Generate a second-level statistics data products based on the IWP dataset from P
 
    **Short_tutorials: Step-by-step tutorials to generate IWP stats maps.**
 
+   long_tutorials: The entire progress track along the project meetings.
+
    gpkg_statstistics_mapping_noDatabase_alaska: the code using geopackages to generate big stats maps. (This is what we use currently.)
 
    shapefile_CountMap: the code using shapefile to generate only count maps.
@@ -23,7 +25,7 @@ Generate a second-level statistics data products based on the IWP dataset from P
 
    1) using geopackages.
 
-      **Without database: This is the code we are currently use for generating data products. It runs without database to achieve the best performance.**
+      **statistics_mapping_noDatabase.py (Without database): This is the code we are currently use for generating data products. It runs without database to achieve the best performance.**
 
       With database: This is previous experiments we've tried.
 
