@@ -35,7 +35,7 @@ Generate a second-level statistics data products based on the IWP dataset from P
 
 
 
-
+## Project introduction
 
 ## 1. Objectives
 Ice Wedge (IW) is a crack in the ground formed by a narrow or thin piece of ice that measures up to 3–4 meters in length at ground level. As IW gets deeper, Ice Wedge Polygons are formed. 
