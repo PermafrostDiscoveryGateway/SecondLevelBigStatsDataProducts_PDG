@@ -41,9 +41,40 @@ Generate a second-level statistics data products based on the IWP dataset from P
 
 
 
-## Project introduction
+## Prerequisites
 
-## 1. Objectives
+- Python 3.8 or higher
+
+- Recommended to use a virtual environment
+
+
+## Installation
+### 1) Clone the repository:
+
+   ```bash
+   git clone https://github.com/ASUcicilab/Second-level-Big-Stats-Data-Products.git
+   cd Second-level-Big-Stats-Data-Products
+   ```
+
+### 2) Create and activate a virtual environment:
+
+You can create either using pip or conda based on the running environment. Here we give an example using pip.
+
+   ```python3 -m venv tutorial-venv```
+   ```source venv/bin/activate```
+
+### 3) Install required python packages
+
+   ```pip install -r requirements.txt```
+
+
+-------------------------------
+
+
+
+## 🚀 Getting Started
+
+## 1. Project objectives
 Ice Wedge (IW) is a crack in the ground formed by a narrow or thin piece of ice that measures up to 3–4 meters in length at ground level. As IW gets deeper, Ice Wedge Polygons are formed. 
 
 The large number of IWPs across the entire Pan-Arctic region were extracted and organized by PDG (either in geopackage or shapefile format in an arctic projection EPSG:3413).
