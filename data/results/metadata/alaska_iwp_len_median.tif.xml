@@ -7,7 +7,7 @@
 </citeinfo>
 </citation>
 <descript>
-<abstract>The raster calculates the median length value among all deduplicated IWPs with their centroid falling within 1km resolution. (If the IWPs is overlaid by the 1km pixel BBOX, but their centroids falling outside, they won't be count in this pixel). </abstract>
+<abstract>The raster calculates the median length value among all deduplicated IWPs with their centroid falling within 1km resolution. (If the IWPs is overlaid by the 1km pixel BBOX, but their centroids falling outside, they won't be count in this pixel). EPSG: 3413. </abstract>
 <purpose>This raster stores the length (median value) of IWPs in Alaska. Each pixel value shows the median length of all IWPs within 1km*1km area.</purpose>
 </descript>
 <keywords>
