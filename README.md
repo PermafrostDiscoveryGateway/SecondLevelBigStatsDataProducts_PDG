@@ -43,7 +43,7 @@ Generate a second-level statistics data products based on the IWP dataset from P
 
 ## Prerequisites
 
-- Python 3.8 or higher
+- Python 3.7 or higher
 
 - Recommended to use a virtual environment
 
