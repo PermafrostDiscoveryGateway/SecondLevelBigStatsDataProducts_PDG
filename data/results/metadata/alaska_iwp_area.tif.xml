@@ -7,7 +7,7 @@
 </citeinfo>
 </citation>
 <descript>
-<abstract>The raster calculates the area sum of all deduplicated IWPs with their centroid falling within 1km resolution. (If the IWPs is overlaid by the 1km pixel BBOX, but their centroids falling outside, they won't be count in this pixel). </abstract>
+<abstract>The raster calculates the area sum of all deduplicated IWPs with their centroid falling within 1km resolution. (If the IWPs is overlaid by the 1km pixel BBOX, but their centroids falling outside, they won't be count in this pixel). EPSG: 3413. </abstract>
 <purpose>This raster stores the total area of IWPs in Alaska. Each pixel value shows the area sum of IWPs within the 1km*1km area.</purpose>
 </descript>
 <keywords>

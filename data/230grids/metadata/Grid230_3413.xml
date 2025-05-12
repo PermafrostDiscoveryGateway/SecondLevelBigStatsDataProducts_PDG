@@ -7,7 +7,7 @@
 </citeinfo>
 </citation>
 <descript>
-<abstract>The size of one grid is 256km * 256km. The grids were created using Fishnet tool in ArcGIS, starting from bottom left corner (-3,189,757.915768m, -3,189,757.915768m), to upper left corner (3,210,242.084242m, 3,210,242.084242m).To search for all IWPs segmented, we visually inspect the grids which potentially cover IWPs, and slightly broaden the extent to ensure no IWPs are missing.North Bound: 2,698,242.084287 mSouth Bound: -1,909,757.915790East Bound: 3,210,242.084268 mWest Bound: -3,189,757.915768 m</abstract>
+<abstract>The size of one grid is 256km * 256km. The grids were created using Fishnet tool in ArcGIS, starting from bottom left corner (-3,189,757.915768m, -3,189,757.915768m), to upper left corner (3,210,242.084242m, 3,210,242.084242m).To search for all IWPs segmented, we visually inspect the grids which potentially cover IWPs, and slightly broaden the extent to ensure no IWPs are missing. North Bound: 2,698,242.084287 m. South Bound: -1,909,757.915790. East Bound: 3,210,242.084268 m. West Bound: -3,189,757.915768 m. EPSG: 3413.</abstract>
 <purpose>230 Grids is created to cover Ice Wedge Polygon (IWP) in Pan-Arctic </purpose>
 </descript>
 <keywords>

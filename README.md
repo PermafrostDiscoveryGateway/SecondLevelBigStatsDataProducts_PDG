@@ -3,31 +3,31 @@ Generate a second-level statistics data products based on the IWP dataset from P
 
 
 -------------------------------
-## Repository introduction
-1. Tutorials: this foloder contains all the detailed progresses we have done to produce this big data product along the project. It consists of three python files that introduce every step to generate results.
+## Repository Structure
+1. 'tutorials/': Step-by-step guides and detailed progress documentation. This foloder contains all the detailed progresses we have done to produce this big data product along the project. It consists of three python files that introduce every step to generate results.
 
-   **Short_tutorials: Step-by-step tutorials to generate IWP stats maps.**
+   **short_tutorial.pdf:A step-by-step tutorial to generate current IWP stats maps.**
 
-   long_tutorials: The entire progress track along the project meetings.
+   long_tutorial.pdf: The entire progress track along the project meetings.
 
-   gpkg_statstistics_mapping_noDatabase_alaska: the code using geopackages to generate big stats maps. (This is what we use currently.)
+   **gpkg_statstistics_mapping_noDatabase_alaska.ipynb: the code using geopackages to generate current big stats maps. (This is what we use currently.)**
 
-   shapefile_CountMap: the code using shapefile to generate only count maps.
+   shapefile_CountMap.ipynb: the code using shapefile to generate only count maps.
 
-   shapefile_CoverageMap: the code using shapefile to generate coverage heat maps.
+   shapefile_CoverageMap.ipynb: the code using shapefile to generate coverage heat maps.
 
 
-   
-3. Data: this folder contains the part of the results we have generated in Alaska region.
+
+3. 'data/': Sample datasets and generated results, primarily focusing on the Alaska region. This folder contains the part of the results we have generated in Alaska region.
    This folder contains part of final stats: IWP count, IWP area, length (diameter) sum/max/min/median/mean/perimeter, width, LCP count.
   
-4. src: this foloder contains two sub project:
+4. 'src/': Core scripts for data processing and map generation. This foloder contains two sub project:
 
    1) using geopackages.
 
       **statistics_mapping_noDatabase.py (Without database): This is the code we are currently use for generating data products. It runs without database to achieve the best performance.**
 
-      With database: This is previous experiments we've tried.
+      statistics_mapping.py (With database): This is previous experiments we've tried.
 
    3) using shapefile.
   
