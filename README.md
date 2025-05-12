@@ -4,7 +4,7 @@ Generate a second-level statistics data products based on the IWP dataset from P
 
 -------------------------------
 ## Repository Structure
-1. 'tutorials/': Step-by-step guides and detailed progress documentation. This foloder contains all the detailed progresses we have done to produce this big data product along the project. It consists of three python files that introduce every step to generate results.
+1. `tutorials/`: Step-by-step guides and detailed progress documentation. This foloder contains all the detailed progresses we have done to produce this big data product along the project. It consists of three python files that introduce every step to generate results.
 
    **short_tutorial.pdf:A step-by-step tutorial to generate current IWP stats maps.**
 
@@ -18,10 +18,10 @@ Generate a second-level statistics data products based on the IWP dataset from P
 
 
 
-3. 'data/': Sample datasets and generated results, primarily focusing on the Alaska region. This folder contains the part of the results we have generated in Alaska region.
+3. `data/`: Sample datasets and generated results, primarily focusing on the Alaska region. This folder contains the part of the results we have generated in Alaska region.
    This folder contains part of final stats: IWP count, IWP area, length (diameter) sum/max/min/median/mean/perimeter, width, LCP count.
   
-4. 'src/': Core scripts for data processing and map generation. This foloder contains two sub project:
+4. `src/`: Core scripts for data processing and map generation. This foloder contains two sub project:
 
    1) using geopackages.
 
@@ -58,7 +58,7 @@ Generate a second-level statistics data products based on the IWP dataset from P
 
 ### 2) Create and activate a virtual environment:
 
-You can create either using pip or conda based on the running environment. Here we give an example using pip.
+You can create either using pip or conda based on the running environment. This is an example using pip.
 
    ```python3 -m venv tutorial-venv```
    ```source venv/bin/activate```
