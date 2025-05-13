@@ -4,7 +4,7 @@ name: Mirror to Other Repositories
 on:
   push:
     branches:
-      - main  # Or replace with your primary branch
+      - public main  # Or replace with your primary branch
 
 jobs:
   mirror:
