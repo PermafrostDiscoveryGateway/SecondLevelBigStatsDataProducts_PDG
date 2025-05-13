@@ -15,7 +15,7 @@ jobs:
 
       - name: Mirror to personal repo
         env:
-          TOKEN: ${{ secrets.Personal_TOKEN }}
+          TOKEN: ${{ secrets.PERSONAL_TOKEN_IWP }}
         run: |
           git config user.name "Xiao-Chen820"
           git config user.email "xiaochen82028@gmail.com"
@@ -24,7 +24,7 @@ jobs:
 
       - name: Mirror to PDG org repo
         env:
-          TOKEN: ${{ secrets.PDG_TOKEN }}
+          TOKEN: ${{ secrets.PDG_TOKEN_IWP }}
         run: |
           git config user.name "Xiao-Chen820"
           git config user.email "xiaochen82028@gmail.com"
