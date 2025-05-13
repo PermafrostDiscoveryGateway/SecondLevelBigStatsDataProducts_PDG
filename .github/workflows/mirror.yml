@@ -13,7 +13,7 @@ jobs:
       - name: Checkout source repo
         uses: actions/checkout@v4
 
-      - name: Mirror to PDG repo
+      - name: Mirror to PDG org repo
         env:
           TOKEN: ${{ secrets.SecondLevelBigStatsDataProducts_PDG }}
         run: |
