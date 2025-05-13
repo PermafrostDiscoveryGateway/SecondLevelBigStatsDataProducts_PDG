@@ -19,8 +19,8 @@ jobs:
         run: |
           git config --global user.name "Xiao-Chen820"
           git config --global user.email "xiaochen82028@gmail.com"
-          git remote add org https://x-access-token:${TOKEN}@github.com/PermafrostDiscoveryGateway/SecondLevelBigStatsDataProducts_PDG.git
-          git push --force org main
+          git remote add pdg https://x-access-token:${TOKEN}@github.com/PermafrostDiscoveryGateway/SecondLevelBigStatsDataProducts_PDG.git
+          git push --force pdg main
 
       - name: Mirror to personal repo
         env:
