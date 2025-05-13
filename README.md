@@ -25,7 +25,7 @@ Generate a second-level statistics data products based on the IWP dataset from P
 
    1) using geopackages.
 
-      **statistics_mapping_noDatabase.py (Without database): This is the code we are currently use for generating data products. It runs without database to achieve the best performance.**
+      **statistics_mapping_noDatabase.py (Without database. This is what we use currently): This is the code we are currently use for generating data products. It runs without database to achieve the best performance.**
 
       statistics_mapping.py (With database): This is previous experiments we've tried.
 
