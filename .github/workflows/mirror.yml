@@ -19,12 +19,12 @@ jobs:
         run: |
           git config --global user.name "Xiao-Chen820"
           git config --global user.email "xiaochen82028@gmail.com"
-          git remote add school https://x-access-token:${TOKEN}@github.com/PermafrostDiscoveryGateway/SecondLevelBigStatsDataProducts_PDG.git
-          git push --force school main
+          git remote add org https://x-access-token:${TOKEN}@github.com/PermafrostDiscoveryGateway/SecondLevelBigStatsDataProducts_PDG.git
+          git push --force org main
 
       - name: Mirror to personal repo
         env:
           TOKEN: ${{ secrets.SecondLevelBigStatsDataProducts-Personal }}
         run: |
-          git remote add org https://x-access-token:${TOKEN}@github.com/https://github.com/Xiao-Chen820/Second-level-Big-Stats-Data-Products.git
-          git push --force org main
+          git remote add personal https://x-access-token:${TOKEN}@github.com/https://github.com/Xiao-Chen820/Second-level-Big-Stats-Data-Products.git
+          git push --force personal main
