@@ -26,5 +26,5 @@ jobs:
         env:
           TOKEN: ${{ secrets.SecondLevelBigStatsDataProducts-Personal }}
         run: |
-          git remote add org https://x-access-token:${secrets.SecondLevelBigStatsDataProducts-Personal}@github.com/https://github.com/Xiao-Chen820/Second-level-Big-Stats-Data-Products.git
+          git remote add org https://x-access-token:${secrets.SecondLevelBigStatsDataProducts_Personal}@github.com/https://github.com/Xiao-Chen820/Second-level-Big-Stats-Data-Products.git
           git push --force org main
