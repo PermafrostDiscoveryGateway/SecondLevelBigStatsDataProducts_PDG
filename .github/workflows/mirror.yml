@@ -13,6 +13,15 @@ jobs:
       - name: Checkout source repo
         uses: actions/checkout@v4
 
+      - name: Mirror to personal repo
+        env:
+          TOKEN: ${{ secrets.Personal_TOKEN }}
+        run: |
+          git config user.name "Xiao-Chen820"
+          git config user.email "xiaochen82028@gmail.com"
+          git remote add personal https://x-access-token:${TOKEN}@github.com/Xiao-Chen820/Second-level-Big-Stats-Data-Products.git
+          git push --force personal main
+
       - name: Mirror to PDG org repo
         env:
           TOKEN: ${{ secrets.PDG_TOKEN }}
@@ -22,9 +31,4 @@ jobs:
           git remote add org https://x-access-token:${TOKEN}@github.com/PermafrostDiscoveryGateway/SecondLevelBigStatsDataProducts_PDG.git
           git push --force org main
 
-      - name: Mirror to personal repo
-        env:
-          TOKEN: ${{ secrets.Personal_TOKEN }}
-        run: |
-          git remote add personal https://x-access-token:${TOKEN}@github.com/Xiao-Chen820/Second-level-Big-Stats-Data-Products.git
-          git push --force personal main
+      
