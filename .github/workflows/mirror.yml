@@ -1,0 +1,30 @@
+# .github/workflows/mirror.yml
+name: Mirror to Other Repositories
+
+on:
+  push:
+    branches:
+      - main  # Or replace with your primary branch
+
+jobs:
+  mirror:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout source repo
+        uses: actions/checkout@v4
+
+      - name: Mirror to PDG repo
+        env:
+          TOKEN: ${{ secrets.SecondLevelBigStatsDataProducts_PDG }}
+        run: |
+          git config --global user.name "Xiao-Chen820"
+          git config --global user.email "xiaochen82028@gmail.com"
+          git remote add school https://x-access-token:${secrets.SecondLevelBigStatsDataProducts}@github.com/PermafrostDiscoveryGateway/SecondLevelBigStatsDataProducts_PDG.git
+          git push --force school main
+
+      - name: Mirror to personal repo
+        env:
+          TOKEN: ${{ secrets.SecondLevelBigStatsDataProducts-Personal }}
+        run: |
+          git remote add org https://x-access-token:${secrets.SecondLevelBigStatsDataProducts-personal}@github.com/https://github.com/Xiao-Chen820/Second-level-Big-Stats-Data-Products.git
+          git push --force org main
