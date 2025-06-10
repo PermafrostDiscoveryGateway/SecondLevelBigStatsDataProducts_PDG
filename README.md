@@ -18,7 +18,13 @@ Generate a second-level statistics data products based on the IWP dataset from P
 
 
 
-3. `data/`: Study area: 119 grids, and generated sample results, primarily focusing on the Alaska region. This folder contains the part of the results we have generated in Alaska region.
+3. `data/`: Study area: 119 grids, and generated sample results, primarily focusing on the Alaska region. This folder contains:
+   
+   1) `119grids/`: **Current study area we are using: 119 grids (subregions).**
+
+   2) `230grids/`: Previous study area we are using: 230 grids (subregions).
+   
+   3) the part of the results we have generated in Alaska region.
    This folder contains part of final stats: IWP count, IWP area, length (diameter) sum/max/min/median/mean/perimeter, width, LCP count.
   
 4. `src/`: Core scripts for data processing and map generation. This foloder contains two sub project:
