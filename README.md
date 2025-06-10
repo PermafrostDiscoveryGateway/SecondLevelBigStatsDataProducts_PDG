@@ -18,7 +18,7 @@ Generate a second-level statistics data products based on the IWP dataset from P
 
 
 
-3. `data/`: Sample datasets and generated results, primarily focusing on the Alaska region. This folder contains the part of the results we have generated in Alaska region.
+3. `data/`: Study area: 119 grids, and generated sample results, primarily focusing on the Alaska region. This folder contains the part of the results we have generated in Alaska region.
    This folder contains part of final stats: IWP count, IWP area, length (diameter) sum/max/min/median/mean/perimeter, width, LCP count.
   
 4. `src/`: Core scripts for data processing and map generation. This foloder contains two sub project:
@@ -129,7 +129,7 @@ https://par.nsf.gov/biblio/10554721-ice-wedge-network-centerline-ice-wedge-polyg
 ## 4. Products partial exhibition
 
 
-* 230 Grids
+* 119 Grids
 
 ![image](https://github.com/user-attachments/assets/75178f11-22ec-4721-8d0d-991a2a45e4b9)
 
