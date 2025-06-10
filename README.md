@@ -131,7 +131,8 @@ https://par.nsf.gov/biblio/10554721-ice-wedge-network-centerline-ice-wedge-polyg
 
 * 119 Grids
 
-![image](https://github.com/user-attachments/assets/75178f11-22ec-4721-8d0d-991a2a45e4b9)
+![image](https://github.com/user-attachments/assets/9b994e5b-bc58-4904-acf6-11edd1740609)
+
 
 
 * IWP count in Alaska
