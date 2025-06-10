@@ -10,3 +10,4 @@ pyproj
 requests
 joblib
 tqdm
+bs4
