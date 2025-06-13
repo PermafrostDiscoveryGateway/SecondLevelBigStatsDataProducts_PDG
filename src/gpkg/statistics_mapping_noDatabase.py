@@ -182,6 +182,7 @@ def process_pixel(index, pixel_bounds, tms, zoom=15, remote=True):
     dl_root = '.' + process_uuid
     os.makedirs(dl_root)
 
+    # Initialize a list of default zeros as placeholder statstics
     stats = [0.] * len(_stats_names)
     try:
         # Get the intersected tiles
@@ -226,7 +227,7 @@ def main(cell_index, n_workers=20):
     from tqdm import tqdm
 
     tms = morecantile.tms.get("WGS1984Quad")
-    grid = gpd.read_file("grid_230.geojson")
+    grid = gpd.read_file("../../data/119grids/grid_119.geojson")
     cell = grid.loc[cell_index - 1, "geometry"]
 
     pixel_bounds = gen_pixel_bounds(cell.bounds)
