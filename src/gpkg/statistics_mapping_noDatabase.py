@@ -22,15 +22,15 @@ N_PIXELS = 256
 SIZE_PIXEL = 1000
 SESSION = requests.Session()
 __retry = Retry(
-    total=5, backoff_factor=0.5, 
-    status_forcelist=[429, 500, 502, 503, 504]
+    total=20, backoff_factor=0.5, 
+    status_forcelist=[407,408, 429, 451, 500, 502, 503, 504]
 )
 __adapter = HTTPAdapter(max_retries=__retry)
 SESSION.mount('https://', __adapter)
 __lock = multiprocessing.Manager().Lock()
 
-_stats_names = ['count', 'area', 'diameter', 'dia_min', 'dia_max', 'dia_median',
-                'perimeter', 'width', 'LCP_count', 'iwn_len']
+_stats_names = ['count', 'area', 'diameter', 'dia_min', 'dia_max', 'dia_median', 'dia_mean', 'dia_std',
+                'perimeter', 'width', 'LCP_count'] # , 'iwn_len'
 
 def gen_pixel_bounds(cell_bounds):
     minx, miny, maxx, maxy = cell_bounds
