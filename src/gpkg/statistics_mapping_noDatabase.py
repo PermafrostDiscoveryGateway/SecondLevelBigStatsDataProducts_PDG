@@ -7,6 +7,7 @@ import geopandas as gpd
 import rasterio, cv2
 from rasterio.transform import from_origin
 from rasterio.features import rasterize
+from rasterio.warp import calculate_default_transform, reproject, Resampling
 from skimage.morphology import skeletonize
 
 import morecantile
@@ -18,12 +19,12 @@ from requests.adapters import HTTPAdapter, Retry
 import multiprocessing
 from joblib import Parallel, delayed
 
-N_PIXELS = 256
+N_PIXELS = 210
 SIZE_PIXEL = 1000
 SESSION = requests.Session()
 __retry = Retry(
     total=20, backoff_factor=0.5, 
-    status_forcelist=[407,408, 429, 451, 500, 502, 503, 504]
+    status_forcelist=[407, 408, 429, 451, 500, 502, 503, 504]
 )
 __adapter = HTTPAdapter(max_retries=__retry)
 SESSION.mount('https://', __adapter)
@@ -40,9 +41,35 @@ def gen_pixel_bounds(cell_bounds):
 
     return [(i, j, i + SIZE_PIXEL, j + SIZE_PIXEL) for j in y for i in x]
 
+# def reproject_pixel(pixel_bounds, src_crs, dst_crs):
+#     transformer = Transformer.from_crs(src_crs, dst_crs)
+#     # Create a polygon from the bounding box
+#     polygon = box(*pixel_bounds)
+
+#     # Define the interval for sampling points
+#     interval = SIZE_PIXEL // 5  
+    
+#     # Sample points along the edges of the polygon
+#     points = []
+#     for i in range(len(polygon.exterior.coords) - 1):
+#         line = LineString([polygon.exterior.coords[i], polygon.exterior.coords[i + 1]])
+#         num_points = int(line.length // interval)
+#         points.extend([line.interpolate(float(j) / num_points, normalized=True) for j in range(num_points + 1)])
+
+#     # Convert the points to a list of coordinates
+#     coords = [(point.x, point.y) for point in points]
+
+#     # Transform the coordinates
+#     coords = [transformer.transform(x, y) for x, y in coords]
+#     coords = [(y, x) for x, y in coords]
+
+#     reproject_pixel_bbox = gpd.GeoDataFrame(geometry=[Polygon(coords)])
+
+#     return reproject_pixel_bbox
+
 def get_intersected_tiles(bounds, tms, zoom=15):
     # Define the transformer from EPSG:3413 to EPSG:4326
-    transformer = Transformer.from_crs("EPSG:3413", "EPSG:4326")
+    transformer = Transformer.from_crs("EPSG:6931", "EPSG:4326")
 
     # Create a polygon from the bounding box
     polygon = box(*bounds)
@@ -70,7 +97,7 @@ def get_intersected_tiles(bounds, tms, zoom=15):
     tiles = list(tms.tiles(*pixel_bbox.total_bounds, zooms=zoom))
     bbox_func = lambda x: box(x.left, x.bottom, x.right, x.top)
     filtered_tiles = [tile for tile in tiles if pixel_bbox.intersects(bbox_func(tms.bounds(tile))).any()]
-    # print(len(filtered_tiles))
+    # print(filtered_tiles)
 
     return filtered_tiles
 
@@ -86,10 +113,12 @@ def download_tile(tile, download_root='downloads'):
                 raise RuntimeError('oversized source file detected.')
             # URL is available, proceed to download
             response = SESSION.get(url)
+            with open('tiles_downloaded.log', 'a') as f:
+                f.write(f"{url}\n")
             with open(download_path, 'wb') as f:
                 f.write(response.content)
             return True
-    except requests.RequestException as e:
+    except (requests.RequestException, RuntimeError) as e:
         print(f"Error checking URL: {url}, Error: {e}", file=open('dl_err.log', 'a'))
 
     return False
@@ -134,11 +163,14 @@ def IWP_skelenize(geoms, bounds, size=SIZE_PIXEL, kernel_size=11):
 
     return IWP_skeleton
 
-def data_analyse(tiles, bounds, file_root='downloads', crs='EPSG:3413'):
+def data_analyse(tiles, bounds, file_root='downloads', crs='EPSG:6931'):
+    # reproject_pixel_bbox = reproject_pixel(bounds, 'EPSG:6931', crs)
+    print(f"Processing {len(tiles)} tiles within bounds {bounds}, The total bounds are: {bounds[0]}, {bounds[1]}, {bounds[2]}, {bounds[3]}\n", file=open('tiles_analyse.log', 'a'))
     gdf = gpd.GeoDataFrame()
     for tile in tiles:
         tile_path = os.path.join(file_root, f'{tile.z}_{tile.x}_{tile.y}.gpkg')
         if os.path.getsize(tile_path) > 1024**3:
+            # Block other processes until this tile is done
             with __lock:
                 _gdf = gpd.read_file(tile_path)
                 dedup_gdf = _gdf[_gdf['staging_duplicated'] == False]
@@ -147,15 +179,22 @@ def data_analyse(tiles, bounds, file_root='downloads', crs='EPSG:3413'):
             _gdf = gpd.read_file(tile_path)
             dedup_gdf = _gdf[_gdf['staging_duplicated'] == False]
         gdf = pd.concat([gdf, dedup_gdf], ignore_index=True)
+    
+    print(f"Total number of records: {len(gdf)}", file=open('tiles_analyse.log', 'a'))
 
     # fileter the data based on the column 'centroidX' and 'centroidY' to get the data within the polygon
+    # date_vals = pd.to_numeric(gdf['Date'], errors='coerce')
+    gdf = gdf.to_crs(crs)
     inbox_gdf = gdf[
-        gdf['CentroidX'].between(bounds[0], bounds[2]) & 
-        gdf['CentroidY'].between(bounds[1], bounds[3])
-    ]
+        gdf.geometry.centroid.x.between(bounds[0], bounds[2]) & 
+        gdf.geometry.centroid.y.between(bounds[1], bounds[3])
+    ] # & date_vals.between(20100101, 20201231)
+    print(f"gdf geometry of x: {gdf.geometry.centroid.x}", file=open('tiles_analyse.log', 'a'))
+    print(f"gdf geometry of y: {gdf.geometry.centroid.y}", file=open('tiles_analyse.log', 'a'))
 
     # get the skeleton of the IWP
     inbox_gdf = inbox_gdf.to_crs(crs)
+    print(f"Number of records within the bounds: {len(inbox_gdf)}, the projection of gdf is: {gdf.crs}", file=open('tiles_analyse.log', 'a'))
     # IWP_skeleton = IWP_skelenize(inbox_gdf['geometry'], bounds)
     
     # print(inbox_gdf.columns)
@@ -182,7 +221,6 @@ def process_pixel(index, pixel_bounds, tms, zoom=15, remote=True):
     dl_root = '.' + process_uuid
     os.makedirs(dl_root)
 
-    # Initialize a list of default zeros as placeholder statstics
     stats = [0.] * len(_stats_names)
     try:
         # Get the intersected tiles
@@ -199,35 +237,67 @@ def process_pixel(index, pixel_bounds, tms, zoom=15, remote=True):
             stats = data_analyse(downloaded_tiles, pixel_bounds, file_root=dl_root)
     except RuntimeError:
         stats = [-99.] * len(_stats_names)
-    except Exception as e:
+    except (Exception, RuntimeError) as e:
         print(f"Error processing pixel {index}, Error: {e}", file=open('proc_err.log', 'a'))
     finally:
         # Clean up
         shutil.rmtree(dl_root)
+        with open('stats.log', 'a') as f:
+            f.write(f"Process {index} finished with stats: {stats}\n")
         return stats
 
-def save_matrix_as_geotiff(matrix, cell_bounds, output_path, crs='EPSG:3413'):
+def save_matrix_as_geotiff(matrix, cell_bounds, output_path, crs='EPSG:6931'):
     height, width = matrix.shape
     xmin, _, _, ymax = cell_bounds
 
-    with rasterio.open(
-        output_path,
-        'w',
-        driver='GTiff',
-        height=height,
-        width=width,
-        count=1,
-        dtype=matrix.dtype,
-        crs=crs,
-        transform=from_origin(round(xmin), round(ymax), SIZE_PIXEL, SIZE_PIXEL),
-    ) as dst:
-        dst.write(np.flipud(matrix), 1)
+    try: 
+        with rasterio.open(
+            output_path,
+            'w',
+            driver='GTiff',
+            height=height,
+            width=width,
+            count=1,
+            dtype=matrix.dtype,
+            crs=crs,
+            transform=from_origin(round(xmin), round(ymax), SIZE_PIXEL, SIZE_PIXEL),
+        ) as dst:
+            dst.write(np.flipud(matrix), 1)
+    except Exception as e:
+        print(f"Error saving GeoTIFF {output_path}: {e}", file=open('save_err.log', 'a'))
+        raise e
+
+def reproject_raster(input_path, output_path, dst_crs='EPSG:3413'):
+    with rasterio.open(input_path) as src:
+        transform, width, height = calculate_default_transform(
+            src.crs, dst_crs, src.width, src.height, *src.bounds
+        )
+
+        kwargs = src.meta.copy()
+        kwargs.update({
+            'crs': dst_crs,
+            'transform': transform,
+            'width': width,
+            'height': height
+        })
+
+        with rasterio.open(output_path, 'w', **kwargs) as dst:
+            reproject(
+                source=rasterio.band(src, 1),
+                destination=rasterio.band(dst, 1),
+                src_transform=src.transform,
+                src_crs=src.crs,
+                dst_transform=transform,
+                dst_crs=dst_crs,
+                resampling=Resampling.nearest  # use bilinear/cubic for float data
+            )
+
 
 def main(cell_index, n_workers=20):
     from tqdm import tqdm
 
     tms = morecantile.tms.get("WGS1984Quad")
-    grid = gpd.read_file("../../data/119grids/grid_119.geojson")
+    grid = gpd.read_file("../../data/120grids/Elias_validation_grid.geojson")
     cell = grid.loc[cell_index - 1, "geometry"]
 
     pixel_bounds = gen_pixel_bounds(cell.bounds)
@@ -246,10 +316,13 @@ def main(cell_index, n_workers=20):
     for i, name in enumerate(_stats_names):
         # print (np_results[..., i])
         save_matrix_as_geotiff(np_results[..., i], cell.bounds, f'{cell_name}/{cell_name}_{name}.tif')
+        reproject_raster(f'{cell_name}/{cell_name}_{name}.tif',
+                         f'{cell_name}/{cell_name}_{name}_3413.tif', 
+                         dst_crs='EPSG:3413')
 
 if __name__ == "__main__":
     import sys
     if len(sys.argv) > 1:
-        main(int(sys.argv[1]), n_workers=12)
+        main(int(sys.argv[1]), n_workers=20)
     else:
         exit("Please provide the cell index.")
