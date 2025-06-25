@@ -1,0 +1,8 @@
+{
+"type": "FeatureCollection",
+"name": "Elias_validation_grid",
+"crs": { "type": "name", "properties": { "name": "urn:ogc:def:crs:EPSG::6931" } },
+"features": [
+{ "type": "Feature", "properties": { "Shape_Leng": 840000.0, "Shape_Area": 44100000000.0 }, "geometry": { "type": "MultiPolygon", "coordinates": [ [ [ [ -1716841.0, 931681.0 ], [ -1716841.0, 1141681.0 ], [ -1506841.0, 1141681.0 ], [ -1506841.0, 931681.0 ], [ -1716841.0, 931681.0 ] ] ] ] } }
+]
+}
