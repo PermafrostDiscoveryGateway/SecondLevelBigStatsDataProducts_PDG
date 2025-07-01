@@ -113,7 +113,7 @@ def download_tile(tile, download_root='downloads'):
                 raise RuntimeError('oversized source file detected.')
             # URL is available, proceed to download
             response = SESSION.get(url)
-            with open('tiles_downloaded.log', 'a') as f:
+            with open('tiles_downloaded_cell_1.log', 'a') as f:
                 f.write(f"{url}\n")
             with open(download_path, 'wb') as f:
                 f.write(response.content)
@@ -165,7 +165,6 @@ def IWP_skelenize(geoms, bounds, size=SIZE_PIXEL, kernel_size=11):
 
 def data_analyse(tiles, bounds, file_root='downloads', crs='EPSG:6931'):
     # reproject_pixel_bbox = reproject_pixel(bounds, 'EPSG:6931', crs)
-    print(f"Processing {len(tiles)} tiles within bounds {bounds}, The total bounds are: {bounds[0]}, {bounds[1]}, {bounds[2]}, {bounds[3]}\n", file=open('tiles_analyse.log', 'a'))
     gdf = gpd.GeoDataFrame()
     for tile in tiles:
         tile_path = os.path.join(file_root, f'{tile.z}_{tile.x}_{tile.y}.gpkg')
@@ -180,27 +179,31 @@ def data_analyse(tiles, bounds, file_root='downloads', crs='EPSG:6931'):
             dedup_gdf = _gdf[_gdf['staging_duplicated'] == False]
         gdf = pd.concat([gdf, dedup_gdf], ignore_index=True)
     
-    print(f"Total number of records: {len(gdf)}", file=open('tiles_analyse.log', 'a'))
+    # print(f"Total number of records: {len(gdf)}", file=open('tiles_analyse.log', 'a'))
 
     # fileter the data based on the column 'centroidX' and 'centroidY' to get the data within the polygon
-    # date_vals = pd.to_numeric(gdf['Date'], errors='coerce')
-    gdf = gdf.to_crs(crs)
-    inbox_gdf = gdf[
-        gdf.geometry.centroid.x.between(bounds[0], bounds[2]) & 
-        gdf.geometry.centroid.y.between(bounds[1], bounds[3])
-    ] # & date_vals.between(20100101, 20201231)
-    print(f"gdf geometry of x: {gdf.geometry.centroid.x}", file=open('tiles_analyse.log', 'a'))
-    print(f"gdf geometry of y: {gdf.geometry.centroid.y}", file=open('tiles_analyse.log', 'a'))
+    # gdf = gdf.to_crs(crs)
+    # inbox_gdf = gdf[
+    #     gdf.geometry.centroid.x.between(bounds[0], bounds[2]) & 
+    #     gdf.geometry.centroid.y.between(bounds[1], bounds[3])
+    # ]
 
     # get the skeleton of the IWP
-    inbox_gdf = inbox_gdf.to_crs(crs)
-    print(f"Number of records within the bounds: {len(inbox_gdf)}, the projection of gdf is: {gdf.crs}", file=open('tiles_analyse.log', 'a'))
+    gdf = gdf.to_crs(crs)
     # IWP_skeleton = IWP_skelenize(inbox_gdf['geometry'], bounds)
+
+    inbox_gdf = gdf[gdf.geometry.intersects(box(*bounds))]
+
+    dissolved_geom = inbox_gdf.unary_union
+    dissolved_gdf = gpd.GeoDataFrame(geometry=[dissolved_geom], crs=gdf.crs)
+    dissolved_gdf['Area'] = dissolved_gdf.geometry.area
+
     
     # print(inbox_gdf.columns)
     stats = [
         len(inbox_gdf),
-        inbox_gdf['Area'].sum(),
+        # inbox_gdf['Area'].sum(),
+        dissolved_gdf['Area'].sum(),
         inbox_gdf['Length'].sum(),
         inbox_gdf['Length'].min(),
         inbox_gdf['Length'].max(),
@@ -242,9 +245,6 @@ def process_pixel(index, pixel_bounds, tms, zoom=15, remote=True):
     finally:
         # Clean up
         shutil.rmtree(dl_root)
-        with open('stats.log', 'a') as f:
-            f.write(f"Process {index} finished with stats: {stats}\n")
-        return stats
 
 def save_matrix_as_geotiff(matrix, cell_bounds, output_path, crs='EPSG:6931'):
     height, width = matrix.shape
@@ -297,7 +297,7 @@ def main(cell_index, n_workers=20):
     from tqdm import tqdm
 
     tms = morecantile.tms.get("WGS1984Quad")
-    grid = gpd.read_file("../../data/120grids/Elias_validation_grid.geojson")
+    grid = gpd.read_file("../../data/120grids/grid_120.geojson")
     cell = grid.loc[cell_index - 1, "geometry"]
 
     pixel_bounds = gen_pixel_bounds(cell.bounds)
@@ -315,14 +315,14 @@ def main(cell_index, n_workers=20):
     np_results = np.array(results).reshape(N_PIXELS, N_PIXELS, len(_stats_names))
     for i, name in enumerate(_stats_names):
         # print (np_results[..., i])
-        save_matrix_as_geotiff(np_results[..., i], cell.bounds, f'{cell_name}/{cell_name}_{name}.tif')
-        reproject_raster(f'{cell_name}/{cell_name}_{name}.tif',
-                         f'{cell_name}/{cell_name}_{name}_3413.tif', 
-                         dst_crs='EPSG:3413')
+        save_matrix_as_geotiff(np_results[..., i], cell.bounds, f'{cell_name}/{cell_name}_{name}_dissolve.tif')
+        # reproject_raster(f'{cell_name}/{cell_name}_{name}.tif',
+        #                  f'{cell_name}/{cell_name}_{name}_3413.tif', 
+        #                  dst_crs='EPSG:3413')
 
 if __name__ == "__main__":
     import sys
     if len(sys.argv) > 1:
-        main(int(sys.argv[1]), n_workers=20)
+        main(int(sys.argv[1]), n_workers=10)
     else:
         exit("Please provide the cell index.")
