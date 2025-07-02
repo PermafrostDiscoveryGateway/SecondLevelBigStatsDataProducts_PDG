@@ -297,7 +297,7 @@ def main(cell_index, n_workers=20):
     from tqdm import tqdm
 
     tms = morecantile.tms.get("WGS1984Quad")
-    grid = gpd.read_file("../../data/120grids/grid_120.geojson")
+    grid = gpd.read_file("../../data/120grids/aligned_grid_120.geojson")
     cell = grid.loc[cell_index - 1, "geometry"]
 
     pixel_bounds = gen_pixel_bounds(cell.bounds)
