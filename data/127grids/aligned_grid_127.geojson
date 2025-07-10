@@ -1,6 +1,6 @@
 {
 "type": "FeatureCollection",
-"name": "aligned_grid_120",
+"name": "aligned_grid_127",
 "crs": { "type": "name", "properties": { "name": "urn:ogc:def:crs:EPSG::6931" } },
 "features": [
 { "type": "Feature", "properties": { "id": 431, "left": -1472000.0, "top": 816000.0, "right": -1216000.0, "bottom": 560000.0, "row_index": 14, "col_index": 13 }, "geometry": { "type": "Polygon", "coordinates": [ [ [ -1472000.0, 816000.0 ], [ -1216000.0, 816000.0 ], [ -1216000.0, 560000.0 ], [ -1472000.0, 560000.0 ], [ -1472000.0, 816000.0 ] ] ] } },
