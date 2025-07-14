@@ -245,6 +245,7 @@ def process_pixel(index, pixel_bounds, tms, zoom=15, remote=True):
     finally:
         # Clean up
         shutil.rmtree(dl_root)
+        return stats
 
 def save_matrix_as_geotiff(matrix, cell_bounds, output_path, crs='EPSG:6931'):
     height, width = matrix.shape
