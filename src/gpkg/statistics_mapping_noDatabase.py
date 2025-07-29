@@ -19,7 +19,7 @@ from requests.adapters import HTTPAdapter, Retry
 import multiprocessing
 from joblib import Parallel, delayed
 
-N_PIXELS = 210
+N_PIXELS = 256
 SIZE_PIXEL = 1000
 SESSION = requests.Session()
 __retry = Retry(
