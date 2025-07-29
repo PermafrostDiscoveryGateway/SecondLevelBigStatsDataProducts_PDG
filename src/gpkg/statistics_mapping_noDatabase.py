@@ -182,17 +182,17 @@ def data_analyse(tiles, bounds, file_root='downloads', crs='EPSG:6931'):
     # print(f"Total number of records: {len(gdf)}", file=open('tiles_analyse.log', 'a'))
 
     # fileter the data based on the column 'centroidX' and 'centroidY' to get the data within the polygon
-    # gdf = gdf.to_crs(crs)
-    # inbox_gdf = gdf[
-    #     gdf.geometry.centroid.x.between(bounds[0], bounds[2]) & 
-    #     gdf.geometry.centroid.y.between(bounds[1], bounds[3])
-    # ]
+    gdf = gdf.to_crs(crs)
+    inbox_gdf = gdf[
+        gdf.geometry.centroid.x.between(bounds[0], bounds[2]) & 
+        gdf.geometry.centroid.y.between(bounds[1], bounds[3])
+    ]
 
     # get the skeleton of the IWP
     gdf = gdf.to_crs(crs)
     # IWP_skeleton = IWP_skelenize(inbox_gdf['geometry'], bounds)
 
-    inbox_gdf = gdf[gdf.geometry.intersects(box(*bounds))]
+    # inbox_gdf = gdf[gdf.geometry.intersects(box(*bounds))]
 
     dissolved_geom = inbox_gdf.unary_union
     dissolved_gdf = gpd.GeoDataFrame(geometry=[dissolved_geom], crs=gdf.crs)
@@ -202,7 +202,6 @@ def data_analyse(tiles, bounds, file_root='downloads', crs='EPSG:6931'):
     # print(inbox_gdf.columns)
     stats = [
         len(inbox_gdf),
-        # inbox_gdf['Area'].sum(),
         dissolved_gdf['Area'].sum(),
         inbox_gdf['Length'].sum(),
         inbox_gdf['Length'].min(),
