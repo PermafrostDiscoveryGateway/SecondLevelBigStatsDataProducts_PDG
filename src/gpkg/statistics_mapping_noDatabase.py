@@ -315,7 +315,7 @@ def main(cell_index, n_workers=20):
     np_results = np.array(results).reshape(N_PIXELS, N_PIXELS, len(_stats_names))
     for i, name in enumerate(_stats_names):
         # print (np_results[..., i])
-        save_matrix_as_geotiff(np_results[..., i], cell.bounds, f'{cell_name}/{cell_name}_{name}_dissolve.tif')
+        save_matrix_as_geotiff(np_results[..., i], cell.bounds, f'{cell_name}/{cell_name}_{name}.tif')
         # reproject_raster(f'{cell_name}/{cell_name}_{name}.tif',
         #                  f'{cell_name}/{cell_name}_{name}_3413.tif', 
         #                  dst_crs='EPSG:3413')
