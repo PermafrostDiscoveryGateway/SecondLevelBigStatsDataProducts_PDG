@@ -125,9 +125,7 @@ def download_tile(tile, download_root='downloads'):
 
 def tiles_from_local(tile, local_dir='data', working_dir='downloads'):
     local_path = os.path.join(local_dir, f'{tile.z}/{tile.x}/{tile.y}.gpkg')
-    download_path = os.path.join(working_dir, f'{tile.z}_{tile.x}_{tile.y}.gpkg')
     if os.path.exists(local_path):
-        os.link(local_path, download_path)
         return True
     return False
 
@@ -217,7 +215,7 @@ def data_analyse(tiles, bounds, file_root='downloads', crs='EPSG:6931'):
 
     return stats
 
-def process_pixel(index, pixel_bounds, tms, zoom=15, remote=True):
+def process_pixel(index, pixel_bounds, tms, local_dir='/var/data/10.18739/A2KW57K57/iwp_geopackage_high/WGS1984Quad/', zoom=15, remote=False):
     # generate uuid for the process
     process_uuid = str(uuid.uuid4())
     dl_root = '.' + process_uuid
@@ -229,14 +227,16 @@ def process_pixel(index, pixel_bounds, tms, zoom=15, remote=True):
         tiles = get_intersected_tiles(pixel_bounds, tms, zoom)
         # Download the tiles
         if remote:
+            file_root = dl_root
             downloaded_tiles = [tile for tile in tiles 
                                 if download_tile(tile, download_root=dl_root)]
         else:
+            file_root = local_dir
             downloaded_tiles = [tile for tile in tiles 
-                                if tiles_from_local(tile, local_dir='data', working_dir=dl_root)]
+                                if tiles_from_local(tile, local_dir, working_dir=dl_root)]
         # Analyse the data
         if len(downloaded_tiles) > 0:
-            stats = data_analyse(downloaded_tiles, pixel_bounds, file_root=dl_root)
+            stats = data_analyse(downloaded_tiles, pixel_bounds, file_root=file_root)
     except RuntimeError:
         stats = [-99.] * len(_stats_names)
     except (Exception, RuntimeError) as e:
