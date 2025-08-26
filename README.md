@@ -144,6 +144,9 @@ https://par.nsf.gov/biblio/10554721-ice-wedge-network-centerline-ice-wedge-polyg
 * IWP count in Alaska
 
 ![image](https://github.com/user-attachments/assets/14f54b39-4d08-486b-967e-c20558da4a98)
+<img width="1590" height="1460" alt="7fa18ae7a176aca5f717709b01264dc9" src="https://github.com/user-attachments/assets/9a5d578a-42ea-418b-acfc-87d9ea9da756" />
+
+
 
 
 ### 4.1. Product value meaning
