@@ -230,6 +230,7 @@ def process_pixel(index, pixel_bounds, tms, local_dir='/var/data/10.18739/A2KW57
             file_root = dl_root
             downloaded_tiles = [tile for tile in tiles 
                                 if download_tile(tile, download_root=dl_root)]
+                                
         else:
             file_root = local_dir
             downloaded_tiles = [tile for tile in tiles 
